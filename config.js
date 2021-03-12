@@ -1,6 +1,7 @@
 const config = {
   db: {
-    host: "vh302.timeweb.ru",
+    host: "5.23.51.104",
+    port: "3306",
     user: "co48677_wp",
     password: "vasyok97",
     database: "co48677_wp",
