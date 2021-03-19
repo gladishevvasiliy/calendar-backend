@@ -38,8 +38,10 @@ const replacer = (text) => {
   result = result.replace("[/!kiril!]", "<br>");
   result = result.replace("[!nikon!]", "<b>Устав Никона Черногорца: </b>");
   result = result.replace("[/!nikon!]", "<br>");
-  result = result.split("[!/b!]").join("<b>");
-  result = result.split("[!b!]").join("</b>");
+  result = result.split("[!/b!]").join("</b>");
+  result = result.split("[!b!]").join("<b>");
+
+  // result = result.split("\n").join("<b>");
   return result;
 };
 
