@@ -642,11 +642,14 @@ function pr(now) {
   }
   if (day_pasch != "") {
     if (daypr == diffmisc["vnotavailable"]) daypr = day_pasch;
-    else daypr += "<hr size='1' width='100%' noshade>" + day_pasch;
+    else daypr += "" + day_pasch;
   }
   if (den == 0) {
     if (daypr == diffmisc["vnotavailable"]) daypr = dnedel[10];
-    else daypr += "<hr size='1' width='100%' noshade>" + dnedel[10];
+    else daypr; /*  += "" + dnedel[10]; */
+  }
+  if (daypr == diffmisc["vnotavailable"]) {
+    return undefined;
   }
   return daypr;
 }
@@ -657,11 +660,13 @@ function fast(now, opmode = 2) {
   var day = now.getDate();
   var month = now.getMonth();
   var year = now.getYear();
-  var permament = diffmisc["vnotavailable"];
+  // var permament = diffmisc["vnotavailable"];
+  var permament;
   var piter_fast = 0;
   var early_piter_fast = 0;
   var vys, dimension, fs_pass;
   var fast_id = 0;
+  var fastnum = 0;
   if (year < 2000) year += 1900;
   if (year % 4 == 0) vys = 1;
   else vys = 0;
@@ -844,6 +849,7 @@ function fast(now, opmode = 2) {
       if (opmode == 2) nday = 5;
     }
   }
+
   return {
     permament,
     fast_id,
@@ -1048,4 +1054,10 @@ function pascha(year_u) {
 
 //Конец и слава Богу
 
-module.exports = { getJulianAndGregorianDate, replacer, pr, fast, nedel };
+module.exports = {
+  getJulianAndGregorianDate,
+  replacer,
+  pr,
+  fast,
+  nedel,
+};

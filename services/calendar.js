@@ -19,8 +19,9 @@ async function getDayData(day, month) {
   }
 }
 
-async function getFastsData(fastnum, month, day, dayn) {
-  let fastid;
+async function getFastsData(fast_num, month, day, dayn) {
+  let fastnum = fast_num;
+  let fastid, fastlink;
   if (
     fastnum === 0 &&
     ((month === 7 && day > 11) ||
@@ -157,9 +158,13 @@ async function getFastsData(fastnum, month, day, dayn) {
     ndayfast = staticTexts.ndayfast;
   }
   // поиск поста по id
-  let [fast] = await db.query(
-    `SELECT text FROM __fasts_rus WHERE id = ${fastid}`
-  );
+  let fast = [];
+  if (fastid) {
+    let responseFromDB = await db.query(
+      `SELECT text FROM __fasts_rus WHERE id = ${fastid}`
+    );
+    fast = responseFromDB[0];
+  }
 
   // поиск трапезы по дню и месяцу по id
   let [trapeza] = await db.query(
@@ -170,9 +175,9 @@ async function getFastsData(fastnum, month, day, dayn) {
     const [fastInfo] = fast;
     const [trapezaInfo] = trapeza;
     return {
-      fastlink,
+      fastlink: fastlink,
       ndayfast,
-      fast: utils.replacer(fastInfo.text),
+      fast: fastInfo ? utils.replacer(fastInfo.text) : undefined,
       trapeza: trapezaInfo.trapeza
         ? utils.replacer(trapezaInfo.trapeza)
         : "Особых указаний устава о трапезе на этот день нет",
