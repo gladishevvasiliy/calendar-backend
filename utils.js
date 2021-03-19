@@ -41,7 +41,8 @@ const replacer = (text) => {
   result = result.split("[!/b!]").join("</b>");
   result = result.split("[!b!]").join("<b>");
 
-  // result = result.split("\n").join("<b>");
+  result = result.split("\n").join("<br>");
+  result = result.split("\r").join("");
   return result;
 };
 
